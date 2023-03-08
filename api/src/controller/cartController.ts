@@ -3,6 +3,7 @@ import { addCart, deleteCart, update, getCartbyId,addTemp } from "../services/ca
 import { ICart } from '../interfaces/cart';
 import { IOrder } from "../interfaces/order";
 import { Cart } from "../models/cart";
+import { ITemp } from "../interfaces/temp";
 
 import { updateOrder, createOrder } from "../services/order_Service";
 import { Body } from "aws-sdk/clients/s3";
@@ -94,10 +95,11 @@ export const delCart = async (req: Request, res: Response) => {
 
 export const createTemp = async (req: Request, res: Response) => {
     
-    const productData:Body = req.body;
-    console.log('Body',productData)
+    const {_id,uid}:any = req.body;
+    const data:any = req.body;
+   
     try {
-        const product = await addTemp(productData);
+        const product = await addTemp(_id,uid,data);
         return res.send({ statusCode: 200, data: product })
     }
     catch (err: any) {

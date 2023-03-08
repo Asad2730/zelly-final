@@ -129,20 +129,24 @@ const UserProduct = () => {
    if(uid === undefined){
       navigate('/login')
    }else{
-    const formData = new FormData();
-    formData.append('pictures', obj['images'][0]);
-    formData.append('title', obj['title'])
-    formData.append('Price', obj['Price'])
-    formData.append('sizes', obj['sizes'][0])
-    formData.append('status', obj['status'])
-    formData.append('category', obj['category'])
-    formData.append('brandName', obj['brandName'])
-    formData.append('deliveryTime', obj['deliveryTime'])
-    formData.append('description', obj['description'])
-    formData.append('pid', obj['pid'])
-    formData.append('uid',uid)
-
-    axios.post(`http://localhost:2000/api/cart/addTemp`,formData)
+    let jsn = {
+      "_id": obj['_id'],
+      "title":obj['title'],
+      "Price": obj['Price'],
+      "sizes":obj['sizes'],
+       "status": obj['status'],
+      "deliveryTime": obj['deliveryTime'],
+      "description":obj['description'],
+      "available":obj['available'],
+      "pid": obj['pid'],
+      "images": obj['images'][0],
+      "count":obj['count'],
+      "uid":obj['uid'],
+      "brandName":obj['brandName'],
+      "category":obj['category']
+      
+}
+    axios.post(`http://localhost:2000/api/cart/addTemp`,jsn)
     .then(r=>{
       console.log('r',r.data)
     }).catch(er=>console.log('er',er))

@@ -9,6 +9,6 @@ router.get('/getCartList', withAuth, getCartlist)
 router.post('/createCart', withAuth, createCart);
 router.put('/updateCart', withAuth, updateCart);
 router.delete('/deleteCart', withAuth, delCart);
-router.post('/addTemp',createCart)
+router.post('/addTemp',createTemp)
 
 export default router;

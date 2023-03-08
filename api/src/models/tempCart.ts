@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const productSchema = new Schema({
-    id: { type: mongoose.Schema.Types.ObjectId, required: true,  primary: true },
+    _id: { type: mongoose.Schema.Types.ObjectId, required: true,  primary: true },
     title: {
         type: String,
         required: true,
@@ -40,18 +40,16 @@ const productSchema = new Schema({
     pid: {
         type: String,
     },
-    images: [{
+    images: {
         type: String,
-    }],
+    },
     count:{
         type:Number,
     },
     uid:{
-        type:Number
-    },
-    token:{
         type:String
-    }
+    },
+   
 });
 
 export const Temp = mongoose.model("temp", productSchema);
