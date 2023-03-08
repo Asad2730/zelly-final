@@ -1,10 +1,8 @@
 import { Request, Response } from "express";
-import { addCart, deleteCart, update, getCartbyId,addTemp } from "../services/cart_Service";
+import { addCart, deleteCart, update, getCartbyId,addTemp ,getTemp} from "../services/cart_Service";
 import { ICart } from '../interfaces/cart';
 import { IOrder } from "../interfaces/order";
 import { Cart } from "../models/cart";
-import { ITemp } from "../interfaces/temp";
-
 import { updateOrder, createOrder } from "../services/order_Service";
 import { Body } from "aws-sdk/clients/s3";
 
@@ -103,6 +101,17 @@ export const createTemp = async (req: Request, res: Response) => {
         return res.send({ statusCode: 200, data: product })
     }
     catch (err: any) {
+        return res.send({ statusCode: 500, message: err?.message })
+    }
+}
+
+
+export const getTempData = async(req:Request,res:Response) => {
+    const uid: any = req.query.uid;
+    try{
+      const data = await getTemp(uid)
+      return res.send({ statusCode: 200, data: data })
+    }catch(err:any){
         return res.send({ statusCode: 500, message: err?.message })
     }
 }

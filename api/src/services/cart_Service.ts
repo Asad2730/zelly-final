@@ -47,19 +47,27 @@ export const deleteCart = async (id: any) => {
 
 
 export const addTemp = async (id:String,uid:String,productData: Object) => {
-    console.log('id',id)
+   
     const ob = await Temp.updateMany(
         {'_id':id,'uid':uid},
         { $inc: { count: 1 } }
         );
 
     if(ob.matchedCount != 0){
-       console.log('ob',ob)
+      
        return ob;
     }else{
         const product = new Temp(productData);
         await product.save();
         return product;
     }
+   
+}
+
+
+export const getTemp = async (uid:String) => {
+   
+    const data = await Temp.find({'uid':uid});
+     return data;
    
 }

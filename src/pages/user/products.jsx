@@ -129,8 +129,11 @@ const UserProduct = () => {
     let condition = uid === undefined
  
     switch(condition){
-      case false:navigate('/login')
       case true:{
+        navigate('/login')
+        break
+      }
+      case false:{
         let jsn = {
           "_id": obj['_id'],
           "title":obj['title'],
@@ -142,7 +145,7 @@ const UserProduct = () => {
           "available":obj['available'],
           "pid": obj['pid'],
           "images": obj['images'][0],
-          "count":obj['count'],
+          "count":1,
           "uid":obj['uid'],
           "brandName":obj['brandName'],
           "category":obj['category']
@@ -152,7 +155,8 @@ const UserProduct = () => {
         .then(r=>{
           console.log('r',r.data)
         }).catch(er=>console.log('er',er))
-    
+        
+        break
       }
     }
   

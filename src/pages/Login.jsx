@@ -20,10 +20,17 @@ export default function Login() {
         localStorage.setItem("token", res.data["token"]);
         localStorage.setItem('uid',res.data['_id'])
         console.log('res',res.data["userType"])
-        
+
         switch(res.data["userType"] ){
-            case 'CUSTOMER':navigate('/')
-            case 'ADMIN':navigate('/dashboard')
+            case 'CUSTOMER':{
+              navigate('/')
+              break;
+            }
+               
+            case 'ADMIN':{
+              navigate('/dashboard')
+              break
+            }
         }
 
       })
