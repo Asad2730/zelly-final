@@ -18,9 +18,13 @@ const Cart = () => {
  
   const [data,setData] = useState([])
   const [total,setTotal] = useState(0)
- 
+  const [slct,setSlct] = useState(true)
+
   useEffect(()=>{
-     load()
+    if(slct){
+      load()
+    }
+    
   },[data,total])
 
 
@@ -67,7 +71,13 @@ const Cart = () => {
     const updatedData = [...data]
     updatedData[ind]['count'] = v
     setData(updatedData)
+    let price = 10;
+    data.map((i)=>{
+       price += parseFloat(i['Price']) * parseInt(i['count'])
+    })
 
+    setTotal(price) 
+    setSlct(false)
   }
 
   const add = () =>{
