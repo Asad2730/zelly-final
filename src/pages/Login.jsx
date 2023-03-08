@@ -17,7 +17,6 @@ export default function Login() {
     axios
       .post("http://localhost:2000/api/user/login", jsn)
       .then((res) => {
-        console.log("111", res.data["token"]);
         localStorage.setItem("token", res.data["token"]);
         localStorage.setItem('uid',res.data['_id'])
         console.log('res',res.data["userType"])

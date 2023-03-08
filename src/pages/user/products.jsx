@@ -125,33 +125,37 @@ const UserProduct = () => {
   const addCart = (obj) =>{
     let token = localStorage.getItem('token')
     let uid = localStorage.getItem('uid')
-    console.log(token === undefined)
-   if(uid === undefined){
-      navigate('/login')
-   }else{
-    let jsn = {
-      "_id": obj['_id'],
-      "title":obj['title'],
-      "Price": obj['Price'],
-      "sizes":obj['sizes'],
-       "status": obj['status'],
-      "deliveryTime": obj['deliveryTime'],
-      "description":obj['description'],
-      "available":obj['available'],
-      "pid": obj['pid'],
-      "images": obj['images'][0],
-      "count":obj['count'],
-      "uid":obj['uid'],
-      "brandName":obj['brandName'],
-      "category":obj['category']
-      
-}
-    axios.post(`http://localhost:2000/api/cart/addTemp`,jsn)
-    .then(r=>{
-      console.log('r',r.data)
-    }).catch(er=>console.log('er',er))
 
-   }
+    let condition = uid === undefined
+ 
+    switch(condition){
+      case false:navigate('/login')
+      case true:{
+        let jsn = {
+          "_id": obj['_id'],
+          "title":obj['title'],
+          "Price": obj['Price'],
+          "sizes":obj['sizes'],
+           "status": obj['status'],
+          "deliveryTime": obj['deliveryTime'],
+          "description":obj['description'],
+          "available":obj['available'],
+          "pid": obj['pid'],
+          "images": obj['images'][0],
+          "count":obj['count'],
+          "uid":obj['uid'],
+          "brandName":obj['brandName'],
+          "category":obj['category']
+          
+    }
+        axios.post(`http://localhost:2000/api/cart/addTemp`,jsn)
+        .then(r=>{
+          console.log('r',r.data)
+        }).catch(er=>console.log('er',er))
+    
+      }
+    }
+  
   }
   return (
     <>
