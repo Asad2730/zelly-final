@@ -15,6 +15,7 @@ const Cart = () => {
    
   const [data,setData] = useState([])
   const [total,setTotal] = useState(0)
+ 
 
   useEffect(()=>{
      load()
@@ -27,12 +28,12 @@ const Cart = () => {
         let ob = await axios.get(`http://localhost:2000/api/cart/getTemp/${uid}`)
         setData(ob.data.data)
         let price = 10;
-       
         data.map((i)=>{
            price += parseFloat(i['Price']) * parseInt(i['count'])
         })
 
         setTotal(price) 
+      
     }catch(ex){
       console.log(ex)
     }
@@ -162,10 +163,10 @@ const Cart = () => {
               </h2>
 
               <dl className="mt-6 space-y-4">
-                {/* <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between">
                   <dt className="text-sm text-gray-600">Subtotal</dt>
-                  <dd className="text-sm font-medium text-gray-900">$99.00</dd>
-                </div> */}
+                  <dd className="text-sm font-medium text-gray-900">${total - 10}</dd>
+                </div>
                 {/* <div className="flex items-center justify-between border-t border-gray-200 pt-4">
                   <dt className="flex items-center text-sm text-gray-600">
                     <span>Shipping estimate</span>
