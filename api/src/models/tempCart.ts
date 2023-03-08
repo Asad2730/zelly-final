@@ -48,6 +48,9 @@ const productSchema = new Schema({
     },
     uid:{
         type:Number
+    },
+    token:{
+        type:String
     }
 });
 

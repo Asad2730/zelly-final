@@ -3,9 +3,9 @@ import { addCart, deleteCart, update, getCartbyId,addTemp } from "../services/ca
 import { ICart } from '../interfaces/cart';
 import { IOrder } from "../interfaces/order";
 import { Cart } from "../models/cart";
-import {ITemp} from "../interfaces/temp"
 
 import { updateOrder, createOrder } from "../services/order_Service";
+import { Body } from "aws-sdk/clients/s3";
 
 export const getCartlist = async (req: Request, res: Response) => {
     try {
@@ -18,26 +18,7 @@ export const getCartlist = async (req: Request, res: Response) => {
 }
 
 
-export const createTemp = async (req: Request, res: Response) => {
-    
-    // const file = req.file;
-    // if (!file) {
-    //     const error = new Error('Please upload a file');
-    //     console.log(error)
-    // }
 
-
-    const productData:ITemp = req.body;
-    // productData.images = file?.filename;
-
-    try {
-        const product = await addTemp(productData);
-        return res.send({ statusCode: 200, data: product })
-    }
-    catch (err: any) {
-        return res.send({ statusCode: 500, message: err?.message })
-    }
-}
 
 export const getCartItemById = async (req: Request, res: Response) => {
     const userId = req?.body.orderId;
@@ -104,6 +85,20 @@ export const delCart = async (req: Request, res: Response) => {
     try {
         await deleteCart(id);
         return res.send({ message: "cart deleted successfully", statsCode: 200 })
+    }
+    catch (err: any) {
+        return res.send({ statusCode: 500, message: err?.message })
+    }
+}
+
+
+export const createTemp = async (req: Request, res: Response) => {
+    
+    const productData:Body = req.body;
+    console.log('Body',productData)
+    try {
+        const product = await addTemp(productData);
+        return res.send({ statusCode: 200, data: product })
     }
     catch (err: any) {
         return res.send({ statusCode: 500, message: err?.message })

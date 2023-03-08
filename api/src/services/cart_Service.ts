@@ -1,6 +1,6 @@
 import { Cart } from '../models/cart';
 import { ICart } from '../interfaces/cart';
-import {ITemp} from '../interfaces/temp';
+
 import {Temp} from '../models/tempCart';
 
 export const getCartItems = async () => {
@@ -46,7 +46,7 @@ export const deleteCart = async (id: any) => {
 }
 
 
-export const addTemp = async (productData: ITemp) => {
+export const addTemp = async (productData: Object) => {
     const product = new Temp(productData);
     await product.save();
     return product;
