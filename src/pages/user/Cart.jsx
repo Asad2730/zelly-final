@@ -9,14 +9,16 @@ import {
 import  MainHeader  from '../../components/header/MainHeader'
 import Footer from '../../sections/user/Footer'
 import axios from "axios";
+ import { useNavigate } from "react-router-dom";
 
 
-const Cart = () => {
-   
+const Cart = () => { 
+
+   const navigate = useNavigate();
+ 
   const [data,setData] = useState([])
   const [total,setTotal] = useState(0)
  
-
   useEffect(()=>{
      load()
   },[data,total])
@@ -40,9 +42,40 @@ const Cart = () => {
   }
 
 
-  const remove = async(id) =>{
-     
+  const remove = async(id,ind) =>{
+     try{
+      console.log(id,id)
+      let ob = await axios.delete(`http://localhost:2000/api/cart/deleteTemp/${id}`)
+      console.log('ob',ob.data.data)
+      if(ob.data){
+         const filterItem = data.filter(i=>i['_id'] !== id);
+         setData(filterItem)
+         let price = 10;
+         data.map((i)=>{
+            price += parseFloat(i['Price']) * parseInt(i['count'])
+         })
+ 
+         setTotal(price) 
+      }
+     }catch(ex){
+      console.log(ex)
+     }
   }
+
+
+  const select = (v,ind)=>{
+    const updatedData = [...data]
+    updatedData[ind]['count'] = v
+    setData(updatedData)
+
+  }
+
+  const add = () =>{
+    localStorage.setItem('obj',JSON.stringify(data))
+    localStorage.setItem('ttl',total)
+     navigate('/confirmorder')
+  }
+
 
   return (
     <>
@@ -105,7 +138,9 @@ const Cart = () => {
                             Quantity, {product['count']}
                           </label>
                           <select
-                            value={product['count']}
+                            onClick={(e)=>select(e.target.value,productIdx)}
+                            // value={}
+                            defaultValue={product['count']}
                             className="max-w-full rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
                           >
                             <option value={1}>1</option>
@@ -120,7 +155,7 @@ const Cart = () => {
 
                           <div className="absolute top-0 right-0">
                             <button
-                            onClick={()=>remove(product['_id'])}
+                            onClick={()=>remove(product['_id'],productIdx)}
                               type="button"
                               className="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500"
                             >
@@ -198,6 +233,7 @@ const Cart = () => {
 
               <div className="mt-6">
                 <button
+                  onClick={add}
                   type="submit"
                   className="w-full rounded-md border border-transparent bg-indigo-600 py-3 px-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                 >

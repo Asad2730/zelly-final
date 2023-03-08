@@ -71,3 +71,9 @@ export const getTemp = async (uid:String) => {
      return data;
    
 }
+
+export const deleteTemp = async(id:any)=>{
+    console.log('id',id)  
+    const data = await Temp.findByIdAndDelete({ '_id': id });
+    return data;
+}

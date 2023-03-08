@@ -120,8 +120,9 @@ const UserProduct = () => {
       })
       .catch((err) => console.log("Err", err));
   }, []);
+   
 
-
+ 
   const addCart = (obj) =>{
     let token = localStorage.getItem('token')
     let uid = localStorage.getItem('uid')

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { addCart, deleteCart, update, getCartbyId,addTemp ,getTemp} from "../services/cart_Service";
+import { addCart, deleteCart, update, getCartbyId,addTemp ,getTemp,deleteTemp} from "../services/cart_Service";
 import { ICart } from '../interfaces/cart';
 import { IOrder } from "../interfaces/order";
 import { Cart } from "../models/cart";
@@ -110,6 +110,17 @@ export const getTempData = async(req:Request,res:Response) => {
     const uid: any = req.query.uid;
     try{
       const data = await getTemp(uid)
+      return res.send({ statusCode: 200, data: data })
+    }catch(err:any){
+        return res.send({ statusCode: 500, message: err?.message })
+    }
+}
+
+export const deleteTempData = async(req:Request,res:Response) => {
+    const id: any = req.params.id;
+    try{
+      console.log('id',id)  
+      const data = await deleteTemp(id)
       return res.send({ statusCode: 200, data: data })
     }catch(err:any){
         return res.send({ statusCode: 500, message: err?.message })
