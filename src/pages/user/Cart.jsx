@@ -136,7 +136,7 @@ const Cart = () => {
                             ) : null}
                           </div>
                           <p className="mt-1 text-sm font-medium text-gray-900">
-                            $ {product['Price']}
+                             {product['Price']} PKR
                           </p>
                         </div>
 
@@ -207,7 +207,7 @@ const Cart = () => {
                 Order summary
               </h2>
 
-              <dl className="mt-6 space-y-4">
+              {/* <dl className="mt-6 space-y-4">
                 <div className="flex items-center justify-between">
                   <dt className="text-sm text-gray-600">Subtotal</dt>
                   <dd className="text-sm font-medium text-gray-900">${total - 10}</dd>
@@ -239,7 +239,30 @@ const Cart = () => {
                     ${total}
                   </dd>
                 </div>
+              </dl> */}
+
+             {
+              data.map((i)=>(
+                <dl className="mt-6 space-y-4">
+                <div className="flex items-center justify-between">
+                  <dt className="text-sm text-gray-600">{i['title']}</dt>
+                  <dd className="text-sm font-medium text-gray-900">{parseFloat(i['Price']) * parseInt(i['count'])} PKR</dd>
+                </div>
+           
+             
+                
               </dl>
+              ))
+             }
+             <div className="flex items-center justify-between border-t border-gray-200 pt-4">
+                  <dt className="text-base font-medium text-gray-900">
+                    Order total
+                  </dt>
+                  <dd className="text-base font-medium text-gray-900">
+                    {total} PKR
+                  </dd>
+                </div>
+
 
               <div className="mt-6">
                 <button
