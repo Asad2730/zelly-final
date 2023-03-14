@@ -30,7 +30,7 @@ export const addProducts = async (productData: IProducts) => {
 }
 
 export const update = async (id: any, data: IProducts) => {
-    const updated = await Products.findOneAndUpdate({ 'id': id },
+    const updated = await Products.findByIdAndUpdate({ '_id': id },
         {
             $set: {
                 'Price': data.Price,
@@ -44,6 +44,8 @@ export const update = async (id: any, data: IProducts) => {
                 'images': data.images
             },
         });
+
+     console.log('updated',update)   
     return updated;
 }
 
@@ -51,5 +53,7 @@ export const deleteProduct = async (id: any) => {
     const del = await Products.findByIdAndDelete({ '_id': id });
     return del;
 }
+
+
 
 

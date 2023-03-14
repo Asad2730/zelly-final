@@ -28,7 +28,8 @@ export default function AddProduct() {
     let navigate = useNavigate();
 
     let Title = id === 'id' ? 'Add Product' : 'Update Product';
-    let URL = id === 'id' ? `http://localhost:2000/api/product/createProduct?token=${token}` : `http://localhost:2000/api/shop/update/?id=${id}&token=${token}`;
+    let URL = id === 'id' ? `http://localhost:2000/api/product/createProduct?token=${token}`
+     : `http://localhost:2000/api/product/editProduct/${id}`;
 
     useEffect(() => {
         console.log('url', URL)
@@ -85,7 +86,7 @@ export default function AddProduct() {
             })
                 .then(response => {
                     console.log(response.data);
-                    navigate('/floors')
+                    navigate('/dashboard')
                 })
                 .catch(error => {
                     console.error(error);

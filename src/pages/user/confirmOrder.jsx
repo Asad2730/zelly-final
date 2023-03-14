@@ -2,12 +2,9 @@ import React from "react";
 import { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
 import { CheckCircleIcon, TrashIcon } from "@heroicons/react/20/solid";
-import  MainHeader  from '../../components/header/MainHeader'
-import Footer from '../../sections/user/Footer'
+import MainHeader from "../../components/header/MainHeader";
+import Footer from "../../sections/user/Footer";
 import axios from "axios";
-
-
-
 
 const deliveryMethods = [
   {
@@ -30,21 +27,17 @@ const ConfirmOrder = () => {
   const [cashOnDelivery, setcashOnDelivery] = useState(null);
   const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(
     deliveryMethods[0]
-   );
+  );
 
-  const ob = JSON.parse(localStorage.getItem('obj')|| "[]")
+  const ob = JSON.parse(localStorage.getItem("obj") || "[]");
   const ttl = localStorage.getItem("ttl");
-  const uid = localStorage.getItem('uid')
+  const uid = localStorage.getItem("uid");
 
-  const submit = () =>{
-     
-  }
+  const submit = () => {};
 
   return (
-    
     <>
-
-    <MainHeader/>
+      <MainHeader />
       <div className="bg-gray-50">
         <div className="mx-auto max-w-2xl px-4 pt-16 pb-24 sm:px-6 lg:max-w-7xl lg:px-8">
           <h2 className="sr-only">Checkout</h2>
@@ -69,7 +62,7 @@ const ConfirmOrder = () => {
                       id="email-address"
                       name="email-address"
                       autoComplete="email"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full h-8 border-[1px] border-gray-300 rounded-md sm:text-sm"
                     />
                   </div>
                 </div>
@@ -94,7 +87,7 @@ const ConfirmOrder = () => {
                         id="first-name"
                         name="first-name"
                         autoComplete="given-name"
-                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
                       />
                     </div>
                   </div>
@@ -112,7 +105,7 @@ const ConfirmOrder = () => {
                         id="last-name"
                         name="last-name"
                         autoComplete="family-name"
-                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
                       />
                     </div>
                   </div>
@@ -129,7 +122,7 @@ const ConfirmOrder = () => {
                         type="text"
                         name="company"
                         id="company"
-                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
                       />
                     </div>
                   </div>
@@ -147,7 +140,7 @@ const ConfirmOrder = () => {
                         name="address"
                         id="address"
                         autoComplete="street-address"
-                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
                       />
                     </div>
                   </div>
@@ -164,7 +157,7 @@ const ConfirmOrder = () => {
                         type="text"
                         name="apartment"
                         id="apartment"
-                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
                       />
                     </div>
                   </div>
@@ -182,7 +175,7 @@ const ConfirmOrder = () => {
                         name="city"
                         id="city"
                         autoComplete="address-level2"
-                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
                       />
                     </div>
                   </div>
@@ -199,7 +192,7 @@ const ConfirmOrder = () => {
                         id="country"
                         name="country"
                         autoComplete="country-name"
-                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
                       >
                         <option>United States</option>
                         <option>Canada</option>
@@ -221,7 +214,7 @@ const ConfirmOrder = () => {
                         name="region"
                         id="region"
                         autoComplete="address-level1"
-                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
                       />
                     </div>
                   </div>
@@ -239,7 +232,7 @@ const ConfirmOrder = () => {
                         name="postal-code"
                         id="postal-code"
                         autoComplete="postal-code"
-                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
                       />
                     </div>
                   </div>
@@ -257,7 +250,7 @@ const ConfirmOrder = () => {
                         name="phone"
                         id="phone"
                         autoComplete="tel"
-                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
                       />
                     </div>
                   </div>
@@ -341,7 +334,32 @@ const ConfirmOrder = () => {
                 <fieldset className="mt-4">
                   <legend className="sr-only">Payment type</legend>
                   <div className="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
-                    {paymentMethods.map((paymentMethod, paymentMethodIdx) => (
+                    <div class="flex">
+                      <div class="mr-4">
+                        <label class="inline-flex items-center">
+                          <input
+                            type="radio"
+                            class="form-radio"
+                            name="radio-option"
+                            value="option1"
+                          />
+                          <span class="ml-2">Cash on delivery</span>
+                        </label>
+                      </div>
+                      <div>
+                        <label class="inline-flex items-center">
+                          <input
+                            type="radio"
+                            class="form-radio"
+                            name="radio-option"
+                            value="option2"
+                          />
+                          <span class="ml-2">Credit card</span>
+                        </label>
+                      </div>
+                    </div>
+
+                    {/* {paymentMethods.map((paymentMethod, paymentMethodIdx) => (
                       <div key={paymentMethod.id} className="flex items-center">
                         {paymentMethodIdx === 0 ? (
                           <input
@@ -367,7 +385,7 @@ const ConfirmOrder = () => {
                           {paymentMethod.title}
                         </label>
                       </div>
-                    ))}
+                    ))} */}
                   </div>
                 </fieldset>
 
@@ -385,7 +403,7 @@ const ConfirmOrder = () => {
                         id="card-number"
                         name="card-number"
                         autoComplete="cc-number"
-                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
                       />
                     </div>
                   </div>
@@ -403,7 +421,7 @@ const ConfirmOrder = () => {
                         id="name-on-card"
                         name="name-on-card"
                         autoComplete="cc-name"
-                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
                       />
                     </div>
                   </div>
@@ -421,7 +439,7 @@ const ConfirmOrder = () => {
                         name="expiration-date"
                         id="expiration-date"
                         autoComplete="cc-exp"
-                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
                       />
                     </div>
                   </div>
@@ -439,7 +457,7 @@ const ConfirmOrder = () => {
                         name="cvc"
                         id="cvc"
                         autoComplete="csc"
-                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
                       />
                     </div>
                   </div>
@@ -455,17 +473,15 @@ const ConfirmOrder = () => {
 
               <div className="mt-4 rounded-lg border border-gray-200 bg-white shadow-sm">
                 <h3 className="sr-only">Items in your cart</h3>
-                <ul role="list" className="divide-y divide-gray-200">
-                 
-                </ul>
+                <ul role="list" className="divide-y divide-gray-200"></ul>
                 <dl className="space-y-6 border-t border-gray-200 py-6 px-4 sm:px-6">
                   <div className="flex items-center justify-between">
                     <dt className="text-sm">Subtotal</dt>
                     <dd className="text-sm font-medium text-gray-900">
-                     {ttl-10}
+                      {ttl - 10}
                     </dd>
                   </div>
-               
+
                   <div className="flex items-center justify-between">
                     <dt className="text-sm">Taxes</dt>
                     <dd className="text-sm font-medium text-gray-900">$10</dd>
@@ -473,14 +489,14 @@ const ConfirmOrder = () => {
                   <div className="flex items-center justify-between border-t border-gray-200 pt-6">
                     <dt className="text-base font-medium">Total</dt>
                     <dd className="text-base font-medium text-gray-900">
-                     {ttl}
+                      {ttl}
                     </dd>
                   </div>
                 </dl>
 
                 <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                   <button
-                  onClick={submit}
+                    onClick={submit}
                     type="submit"
                     className="w-full rounded-md border border-transparent bg-indigo-600 py-3 px-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                   >
@@ -492,7 +508,7 @@ const ConfirmOrder = () => {
           </form>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

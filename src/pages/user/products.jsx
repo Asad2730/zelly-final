@@ -9,8 +9,16 @@ import { Fragment } from "react";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { ChevronDownIcon, PlusIcon } from "@heroicons/react/20/solid";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
 
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+import "./styles.css";
+import { Autoplay, Navigation, Pagination } from "swiper";
 const filters = [
   {
     id: "color",
@@ -97,10 +105,8 @@ const userProducts = [
 ];
 
 const UserProduct = () => {
-   
-
   const navigate = useNavigate();
-  console.log('here')
+  console.log("here");
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const location = useLocation();
   const { id } = useParams();
@@ -120,48 +126,46 @@ const UserProduct = () => {
       })
       .catch((err) => console.log("Err", err));
   }, []);
-   
 
- 
-  const addCart = (obj) =>{
-    let token = localStorage.getItem('token')
-    let uid = localStorage.getItem('uid')
+  const addCart = (obj) => {
+    let token = localStorage.getItem("token");
+    let uid = localStorage.getItem("uid");
 
-    let condition = uid === undefined
- 
-    switch(condition){
-      case true:{
-        navigate('/login')
-        break
+    let condition = uid === undefined;
+
+    switch (condition) {
+      case true: {
+        navigate("/login");
+        break;
       }
-      case false:{
+      case false: {
         let jsn = {
-          "_id": obj['_id'],
-          "title":obj['title'],
-          "Price": obj['Price'],
-          "sizes":obj['sizes'],
-           "status": obj['status'],
-          "deliveryTime": obj['deliveryTime'],
-          "description":obj['description'],
-          "available":obj['available'],
-          "pid": obj['pid'],
-          "images": obj['images'][0],
-          "count":1,
-          "uid":obj['uid'],
-          "brandName":obj['brandName'],
-          "category":obj['category']
-          
-    }
-        axios.post(`http://localhost:2000/api/cart/addTemp`,jsn)
-        .then(r=>{
-          console.log('r',r.data)
-        }).catch(er=>console.log('er',er))
-        
-        break
+          _id: obj["_id"],
+          title: obj["title"],
+          Price: obj["Price"],
+          sizes: obj["sizes"],
+          status: obj["status"],
+          deliveryTime: obj["deliveryTime"],
+          description: obj["description"],
+          available: obj["available"],
+          pid: obj["pid"],
+          images: obj["images"][0],
+          count: 1,
+          uid: obj["uid"],
+          brandName: obj["brandName"],
+          category: obj["category"],
+        };
+        axios
+          .post(`http://localhost:2000/api/cart/addTemp`, jsn)
+          .then((r) => {
+            console.log("r", r.data);
+          })
+          .catch((er) => console.log("er", er));
+
+        break;
       }
     }
-  
-  }
+  };
   return (
     <>
       <MainHeader />
@@ -273,15 +277,78 @@ const UserProduct = () => {
           </Dialog>
         </Transition.Root>
 
-        <main className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-          <div className="border-b border-gray-200 pb-10">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900">
-              New Arrivals
-            </h1>
-            <p className="mt-4 text-base text-gray-500">
-              Checkout out the latest release of Basic Tees, new and improved
-              with four openings!
-            </p>
+        <main className="mx-auto max-w-2xl py-2 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+          <div className="h-52 -mt-14">
+            <Swiper
+              spaceBetween={30}
+              centeredSlides={true}
+              autoplay={{
+                delay: 1000,
+                disableOnInteraction: false,
+              }}
+              pagination={{
+                clickable: true,
+              }}
+              navigation={true}
+              modules={[Autoplay, Pagination, Navigation]}
+              className="mySwiper"
+            >
+              <SwiperSlide>
+                <img
+                  src="https://images.pexels.com/photos/572897/pexels-photo-572897.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  alt=""
+                />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img
+                  src="
+              https://images.pexels.com/photos/3244513/pexels-photo-3244513.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  alt=""
+                />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img
+                  src="https://images.pexels.com/photos/8797307/pexels-photo-8797307.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  alt=""
+                />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img
+                  src="https://images.pexels.com/photos/8100784/pexels-photo-8100784.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  alt=""
+                />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img
+                  src="https://images.pexels.com/photos/3591557/pexels-photo-3591557.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  alt=""
+                />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img
+                  src="https://images.pexels.com/photos/23547/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  alt=""
+                />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img
+                  src="https://images.pexels.com/photos/345522/pexels-photo-345522.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  alt=""
+                />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img
+                  src="https://images.pexels.com/photos/551622/pexels-photo-551622.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  alt=""
+                />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img
+                  src="https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  alt=""
+                />
+              </SwiperSlide>
+            </Swiper>
           </div>
 
           <div className="pt-12 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4">
@@ -345,47 +412,84 @@ const UserProduct = () => {
             {/* Product grid */}
             <div className="mt-6 lg:col-span-2 lg:mt-0 xl:col-span-3">
               <section class="text-gray-600 body-font">
-                <div class="container px-5 py-24 mx-auto">
+                <div class="container px-5 py-8 mx-auto">
                   <div class="flex flex-wrap -m-4">
+                    {products.map((i) => (
+                      // <div class="lg:w-1/4 md:w-1/2 p-4 w-full ">
+                      //   <a class="block relative h-48 rounded overflow-hidden">
+                      //     <img
+                      //       onClick={() => {
+                      //         localStorage.setItem("p_id", i["_id"]);
+                      //         navigate("/productDetail");
+                      //       }}
+                      //       alt="ecommerce"
+                      //       class="object-cover object-center w-full h-full block"
+                      //       src={`http://localhost:2000/uploads/${i["images"][0]}`}
+                      //     />
+                      //   </a>
+                      //   <div class="mt-4 bg-blue-500">
+                      //     <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">
+                      //       {i["brandName"]}
+                      //     </h3>
+                      //     <h1 class="text-gray-900 title-font text-lg font-medium">
+                      //       {i["title"]}
+                      //     </h1>
+                      //     <h2 class="text-gray-900 title-font text-md font-medium">
+                      //       Status: {i["status"]}
+                      //     </h2>
+                      //     <p class="mt-1">Price:${i["Price"]}</p>
+                      //     <button
+                      //       onClick={() => addCart(i)}
+                      //       className="bg-blue-600 hover:bg-blue-900 text-white px-2 py-1 rounded-sm float-right"
+                      //     >
+                      //       add to cart
+                      //     </button>
+                      //   </div>
+                      // </div>
 
-                    {
-                      products.map((i) => (
-                        <div 
-                       
-                        class="lg:w-1/4 md:w-1/2 p-4 w-full">
-                          <a class="block relative h-48 rounded overflow-hidden">
-                            <img
-                             onClick={()=>{
-                              localStorage.setItem('p_id',i['_id'])
-                              navigate('/productDetail')
-                           }}
-                              alt="ecommerce"
-                              class="object-cover object-center w-full h-full block"
-                              src={`http://localhost:2000/uploads/${i['images'][0]}`}
-                            />
-                          </a>
-                          <div class="mt-4">
-                            <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">
-                              {i['brandName']}
-                            </h3>
-                            <h1 class="text-gray-900 title-font text-lg font-medium">
-                              {i['title']}
-                            </h1>
-                            <h2 class="text-gray-900 title-font text-md font-medium">
-                              Status: {i['status']}
+                      <div class=" m-3 w-56 transform overflow-hidden rounded-lg  bg-gray-800 dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg">
+                        <img
+                          onClick={() => {
+                            localStorage.setItem("p_id", i["_id"]);
+                            navigate("/productDetail");
+                          }}
+                          class="h-48 w-full object-cover object-center"
+                          src={`http://localhost:2000/uploads/${i["images"][0]}`}
+                          alt="Product Image"
+                        />
+                        <div class="p-4">
+                          <h2 class="mb-2 text-lg font-medium dark:text-white text-gray-900">
+                            {i["title"]}
+                          </h2>
+
+                          {i["status"] === "available" ? (
+                            <h2 class="mb-2 text-xs font-medium bg-gray-500 w-fit p-1 text-center rounded-md dark:text-white text-gray-900">
+                              {i["status"]}
                             </h2>
-                            <p class="mt-1">Price:${i['Price']}</p>
-                            <button 
-                            onClick={()=>addCart(i)}
-                             className="bg-blue-600 hover:bg-blue-900 text-white px-2 py-1 rounded-sm float-right">
-                              add to cart
+                          ) : (
+                            <h2 class="mb-2 text-xs font-medium bg-red-800 w-fit p-1 text-center rounded-md dark:text-white text-gray-900">
+                              {i["status"]}
+                            </h2>
+                          )}
+
+                          <p class="mb-2 truncate text-base dark:text-gray-300 text-gray-700">
+                            {i["description"]}
+                          </p>
+                          <div class="flex items-center">
+                            <p class="mr-2 text-lg font-semibold text-gray-900 dark:text-white">
+                              {i["Price"]} PKR
+                            </p>
+
+                            <button
+                              onClick={() => addCart(i)}
+                              class="ml-auto text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 px-2 py-1 rounded-lg"
+                            >
+                              Add to cart
                             </button>
                           </div>
                         </div>
-                      ))
-                    }
-
-
+                      </div>
+                    ))}
                   </div>
                 </div>
               </section>

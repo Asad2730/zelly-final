@@ -86,7 +86,8 @@ export default function Products() {
       .catch((err) => console.log(err));
   };
 
-  const handleclick = () => {
+  const handleclick = (id) => {
+    localStorage.setItem('Id',id)
     navigate("/addproduct");
   };
 
@@ -102,7 +103,7 @@ export default function Products() {
         <section class="text-gray-600 body-font">
           <center>
             <button
-              onClick={handleclick}
+              onClick={()=>handleclick('id')}
               className="bg-blue-600 hover:bg-blue-800 text-white rounded-lg px-3 py-2 flex justify-center items-center"
             >
               Add new Product
@@ -110,35 +111,74 @@ export default function Products() {
           </center>
           <div class="container px-5 py-24 mx-auto">
             <div class="flex flex-wrap -m-4">
-              {
-                data.map((i)=>(
-                  <>
-                  <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
-                <a class="block relative h-48 rounded overflow-hidden">
+              {data.map((i) => (
+                <div class="h-fit m-3 w-56 transform overflow-hidden rounded-lg  bg-gray-800 dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg">
                   <img
-                    alt="ecommerce"
-                    class="object-cover object-center w-full h-full block"
-                    src={`http://localhost:2000/uploads/${i['images'][0]}`}
+                    onClick={() => {
+                      localStorage.setItem("p_id", i["_id"]);
+                      navigate("/productDetail");
+                    }}
+                    class="h-48 w-full object-cover object-center"
+                    src={`http://localhost:2000/uploads/${i["images"][0]}`}
+                    alt="Product Image"
                   />
-                </a>
-                <div class="mt-4">
-                  <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">
-                  
-                   {i['brandName']}
-                  </h3>
-                  <h1 class="text-gray-900 title-font text-lg font-medium">
-                  {i['title']}
-                  </h1>
-                  <h1 class="text-gray-900 title-font text-lg font-medium">
-                    Status: {i['status']}
-                  </h1>
-                  <p class="mt-1">Price:${i['Price']}</p>
+                  <div class="p-4">
+                    <h2 class="mb-2 text-lg font-medium dark:text-white text-gray-900">
+                      {i["brandName"]}
+                    </h2>
+
+                    <h2 class="mb-2 text-xs font-medium bg-gray-500 w-fit p-1 text-center rounded-md dark:text-white text-gray-900">
+                      {i["status"]}
+                    </h2>
+
+                    <p class="mb-2 truncate  dark:text-gray-300 text-gray-700">
+                      {i["description"]}
+                    </p>
+                    <div class="flex items-center">
+                      <p class="mr-2 text-lg font-semibold text-gray-900 dark:text-white">
+                        {i["Price"]} PKR
+                      </p>
+
+                      <button
+                         onClick={() => handleclick(i['_id'])}
+                        class="ml-auto text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 px-2 py-1 rounded-lg"
+                      >
+                        Edit
+                      </button>
+                      <button
+                         onClick={() =>deleteProduct(i['_id'])}
+                        class="ml-auto text-sm font-medium text-white bg-red-600 hover:bg-red-700 px-2 py-1 rounded-lg"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>    
-                  </>
-                ))
-              }
-              
+                //     <>
+                //     <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+                //   <a class="block relative h-48 rounded overflow-hidden">
+                //     <img
+                //       alt="ecommerce"
+                //       class="object-cover object-center w-full h-full block"
+                //       src={`http://localhost:2000/uploads/${i['images'][0]}`}
+                //     />
+                //   </a>
+                //   <div class="mt-4">
+                //     <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">
+
+                //      {i['brandName']}
+                //     </h3>
+                //     <h1 class="text-gray-900 title-font text-lg font-medium">
+                //     {i['title']}
+                //     </h1>
+                //     <h1 class="text-gray-900 title-font text-lg font-medium">
+                //       Status: {i['status']}
+                //     </h1>
+                //     <p class="mt-1">Price:${i['Price']}</p>
+                //   </div>
+                // </div>
+                //     </>
+              ))}
             </div>
           </div>
         </section>

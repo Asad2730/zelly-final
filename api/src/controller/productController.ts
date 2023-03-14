@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { product, deleteProduct, addProducts, update, getSingleProduct, getSingleProductId } from "../services/product_Service";
 import { IProducts } from "../interfaces/products";
 import { uploadImage } from "../s3";
+import { Body } from "aws-sdk/clients/s3";
 
 export const getProducts = async (req: Request, res: Response) => {
     try {
@@ -59,12 +60,19 @@ export const getProductwithPk = async (req: Request, res: Response) => {
 
 export const editProduct = async (req: Request, res: Response) => {
     const id: string = req.params.id;
-    console.log('ID', id)
+    const file = req.file;
+    const productData: IProducts = req.body;
+    
+    console.log('ID is ', id)
     if (!id) return res.send({ message: "ID is required in parameters", statusCode: 500 })
     try {
-        const product = await getSingleProduct(id);
-        console.log('data', product)
-        return res.send({ statusCode: 200, data: product })
+        if (req.file) {
+            productData.images = file?.filename; // update the image filename/path
+          }
+         await update(id, productData);
+        
+        return res.send({ message: "data updated successfully", statusCode: 200 })
+    
     }
     catch (err: any) {
         return res.send({ statusCode: 500, message: err?.message })
@@ -72,19 +80,6 @@ export const editProduct = async (req: Request, res: Response) => {
 }
 
 export const createProduct = async (req: Request, res: Response) => {
-    // if (!req.files) return res.send({ statusCode: 500, message: 'no images found' });
-    // const files: any = req?.files;
-    // await uploadImage(files);
-    // const imagePaths: Array<any> = [];
-    // const basePath = `${req.protocol}://localhost:2000/uploads/`
-
-    // if (files) {
-    //     files.map((file: any) => {
-    //         imagePaths.push(`${basePath}${file.originalname}`);
-    //     }
-    //     )
-    // }
-    // // const imageFileName = req?.files?.filename;       // http:localhost:3000/uploads/image-344433 
 
     const file = req.file;
     if (!file) {

@@ -15,6 +15,6 @@ router.get('/getProductByID/:id', withAuth, getProductByID)
 router.get('/getProductwithPk/:id', getProductwithPk)
 router.delete('/deleteProduct', withAuth, delProduct);
 router.get('/getUserProducts/:id', getUserProducts)
-router.get('/editProduct/:id',editProduct)
+router.put('/editProduct/:id',upload.single('pictures'),editProduct)
 
 export default router;
