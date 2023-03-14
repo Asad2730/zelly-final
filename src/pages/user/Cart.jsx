@@ -259,7 +259,7 @@ const Cart = () => {
                     Order total
                   </dt>
                   <dd className="text-base font-medium text-gray-900">
-                    {total} PKR
+                    {total-10} PKR
                   </dd>
                 </div>
 
